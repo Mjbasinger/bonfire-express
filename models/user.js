@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Poschema = mongoose.Schema({
+const userSchema = mongoose.Schema({
     username: {type: String, required: true, unique: true},
     name: String,
     email: {type: String, required: true},

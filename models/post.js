@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
-const Poschema = mongoose.Schema({
-    username: {type: String, required: true, unique: true},
-    name: String,
-    email: {type: String, required: true},
-    password: { type: String, required: true},
-    needs: [String]
+const postSchema = mongoose.Schema({
+    title: String,
+    body: String, 
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
 })
 
-const User = mongoose.model('User', userSchema);
-
-module.exports = User;
+const Post = mongoose.model('Post', postSchema);
+module.exports = Post;

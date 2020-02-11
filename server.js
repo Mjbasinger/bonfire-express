@@ -1,12 +1,22 @@
 const express = require('express');
 const app = express();
-const port = proccess.env.PORT;
+//port variable 
+const port = 8000;
 
+// require('dotenv').config();
 
-// Index route
-app.get('/', (req, res) => {
-    res.send('hewwo');
-});
+//db requirements
+require('./db/db.js');
+
+//middleware
+app.use(express.json())
+
+//controllers for users and posts
+const usersController = require('./controllers/users.js')
+app.use('/users', usersController)
+
+const postsController = require('./controllers/posts.js')
+app.use('/posts', postsController)
 
 app.listen(port, ()=> {
     console.log(`Listening on port ${port}`);
