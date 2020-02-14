@@ -19,6 +19,7 @@ router.get('/', async (req, res) => {
 })
 
 //create Post
+// localhost:8000/posts/new
 router.post('/new', async (req, res)=>{
     try {
         const newPost = await Post.create(req.body);
