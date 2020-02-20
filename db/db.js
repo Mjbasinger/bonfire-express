@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const connectionString = process.env.MONGODB_URI;
+const connectionString = 'mongodb://localhost/bonfire'
 
 mongoose.connect(connectionString, {
     useNewUrlParser: true,
@@ -19,4 +19,4 @@ mongoose.connection.on('disconnected', () => {
 
 mongoose.connection.on('error', (err) => {
     console.log(`Mongoose error: ${err}`);
-})
+})  
