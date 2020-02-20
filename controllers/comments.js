@@ -1,18 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const Post = require('../models/post.js');
-const User = require('../models/user.js')
+const Comment = require('../models/comment');
+// Const User = require('../models/user.js')
 
 //new user
 // router.get('/new', (req, res)=>{
 //     res.send('this is the new user route')
 // })
 
-//index
+// index
 router.get('/', async (req, res) => {
     try {
-        const foundPosts = await Post.find();
-        res.status(200).json(foundPosts)
+        const foundComment = await Comment.find();
+        res.status(200).json(foundComment)
     } catch(err) {
         res.status(400).json({ error: err.message })
     }
@@ -22,11 +22,9 @@ router.get('/', async (req, res) => {
 // localhost:8000/posts/new
 router.post('/new', async (req, res)=>{
     try {
-        const newPost = await Post.create(req.body);
-        const foundUser = await User.findOne({username: req.session.username})
-        req.body.user = foundUser._id;
-        await Post.create(req.body);
-        res.status(200).json(newPost)
+        const newComment = await Comment.create(req.body);
+
+        res.status(200).json(newComment)
     } catch(err) {
         res.status(400).json({
             error: err.message
@@ -35,12 +33,11 @@ router.post('/new', async (req, res)=>{
 })
 
 //show
-// localhost:8000/posts/:id
 router.get('/:id', async (req, res) => {
     try {
-        const foundPost = await Post.findById(req.params.id);
+        const foundComment = await Comment.findById(req.params.id);
     
-        res.status(200).json(foundPost)
+        res.status(200).json(foundComment)
     } catch(err) {
         res.status(400).json({
             error: err.message
@@ -49,22 +46,20 @@ router.get('/:id', async (req, res) => {
 })
 
 //delete route
-// localhost:8000/posts/:id
 router.delete('/:id', async (req, res)=> {
     try {
-        const deletedPost = await Post.findByIdAndRemove(req.params.id);
-        res.json(deletedPost)
+        const deletedComment = await Comment.findByIdAndRemove(req.param.id);
+        res.status(200).json(deletedComment)
     } catch(err) {
         res.status(400).json({error: err.message})
     }
 })
 
 //update route 
-// localhost:8000/posts/:id
 router.put('/:id', async (req, res) => {
     try {
-        const updatedPost = await Post.findByIdAndUpdate(req.params.id, req.body, {new: true})
-        res.status(200).json(updatedPost)
+        const updatedComment = await Comment.findByIdAndUpdate(req.params.id, req.body, {new: true})
+        res.status(200).json(updatedComment)
     } catch(err) {
         res.status(400).json({error: err.message})
     }
