@@ -6,7 +6,7 @@ const session = require('express-session');
 //port variable 
 const port = 8000;
 
-// require('dotenv').config();
+require('dotenv').config();
 
 //db requirements
 require('./db/db.js');
